@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.974">
+    <title>Konreik - Elevate Your Web Presence</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #6c5ce7;
+            --secondary-color: #00cec9;
+            --accent-color: #fd79a8;
+            --text-color: #2d3436;
+            --bg-color: #ffffff;
+            --dark-bg-color: #2d3436;
+            --dark-text-color: #dfe6e9;
+        }
+
+        .dark-mode {
+            --text-color: var(--dark-text-color);
+            --bg-color: var(--dark-bg-color);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: rgba(108, 92, 231, 0.9);
+            color: #fff;
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--secondary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .dark-mode-toggle {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode-toggle:hover {
+            color: var(--secondary-color);
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        h2 {
+            font-size: 48px;
+            margin-bottom: 50px;
+            text-align: center;
+            color: var(--primary-color);
+            font-family: 'Playfair Display', serif;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        #home {
+            background-image: linear-gradient(rgba(108, 92, 231, 0.8), rgba(0, 206, 201, 0.8)), url('https://source.unsplash.com/random/1920x1080/?web-development');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: #fff;
+        }
+
+        .home-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .home-content h1 {
+            font-size: 72px;
+            margin-bottom: 30px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .home-content p {
+            font-size: 24px;
+            margin-bottom: 50px;
+        }
+
+        #services .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .service-item {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .service-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .service-item h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .service-item ul {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .service-item ul li {
+            margin-bottom: 10px;
+        }
+
+        .service-item .price {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        #portfolio .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(108, 92, 231, 0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        .portfolio-overlay h3 {
+            color: #fff;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .portfolio-overlay a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            background-color: var(--secondary-color);
+            padding: 10px 20px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .portfolio-overlay a:hover {
+            background-color: var(--accent-color);
+        }
+
+        #about {
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+
+        #about .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        #about img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        #about .about-content h2 {
+            color: #fff;
+            text-align: left;
+        }
+
+        #about .about-content p {
+            margin-bottom: 30px;
+            font-size: 18px;
+        }
+
+        #contact {
+            background-color: var(--bg-color);
+        }
+
+        #contact form {
+            display: grid;
+            gap: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        #contact input,
+        #contact textarea {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        #contact textarea {
+            height: 200px;
+        }
+
+        #contact button {
+            background-color: var(--primary-color);
+            color: #fff;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        #contact button:hover {
+            background-color: var(--secondary-color);
+        }
+
+        #testimonials {
+            background-color: #f9f9f9;
+        }
+
+        #testimonials .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .testimonial-item {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .testimonial-item img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-item p {
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-item .client-name {
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        footer {
+            background-color: var(--dark-bg-color);
+            color: #fff;
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        footer .social-links {
+            margin-top: 20px;
+        }
+
+        footer .social-links a {
+            color: #fff;
+            font-size: 24px;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+        }
+
+        footer .social-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #fff;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background-color: rgba(108, 92, 231, 0.95);
+                padding: 20px;
+                text-align: center;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                margin: 15px 0;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            #about .container {
+                grid-template-columns: 1fr;
+            }
+
+            .home-content h1 {
+                font-size: 48px;
+            }
+
+            .home-content p {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">Konreik</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="dark-mode-toggle" aria-label="Toggle dark mode">
+                <i class="fas fa-moon"></i>
+            </button>
+            <div class="mobile-menu">&#9776;</div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home">
+            <div class="container">
+                <div class="home-content">
+                    <h1>Elevate Your Web Presence</h1>
+                    <p>Transforming ideas into stunning digital experiences</p>
+                    <a href="#services" class="btn">Explore Our Services</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="services">
+            <div class="container">
+                <h2>Our Services</h2>
+                <div class="service-grid">
+                    <div class="service-item">
+                        <h3>Starter Package</h3>
+                        <ul>
+                            <li>Responsive design</li>
+                            <li>3-5 pages</li>
+                            <li>Basic SEO optimization</li>
+                            <li>Contact form integration</li>
+                        </ul>
+                        <p class="price">$10</p>
+                        <a href="#contact" class="btn">Get Started</a>
+                    </div>
+                    <div class="service-item">
+                        <h3>Professional Package</h3>
+                        <ul>
+                            <li>Custom design</li>
+                            <li>5-10 pages</li>
+                            <li>Advanced SEO optimization</li>
+                            <li>E-commerce integration</li>
+                            <li>Social media integration</li>
+                        </ul>
+                        <p class="price">$25</p>
+                        <a href="#contact" class="btn">Get Started</a>
+                    </div>
+                    <div class="service-item">
+                        <h3>Enterprise Package</h3>
+                        <ul>
+                            <li>Bespoke design</li>
+                            <li>Unlimited pages</li>
+                            <li>Full SEO suite</li>
+                            <li>Custom features and integrations</li>
+                            <li>Advanced analytics</li>
+                            <li>Priority support</li>
+                        </ul>
+                        <p class="price">$50</p>
+                        <a href="#contact" class="btn">Get Started</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio">
+            <div class="container">
+                <h2>Our Portfolio</h2>
+                <div class="portfolio-grid">
+                    <div class="portfolio-item">
+                        <img src="https://source.unsplash.com/random/600x400/?website-1" alt="Project 1">
+                        <div class="portfolio-overlay">
+                            <h3>E-commerce Website</h3>
+                            <a href="#">View Project</a>
+                        </div>
+                    </div>
+                    <div class="portfolio-item">
+                        <img src="https://source.unsplash.com/random/600x400/?website-2" alt="Project 2">
+                        <div class="portfolio-overlay">
+                            <h3>Corporate Branding</h3>
+                            <a href="#">View Project</a>
+                        </div>
+                    </div>
+                    <div class="portfolio-item">
+                        <img src="https://source.unsplash.com/random/600x400/?website-3" alt="Project 3">
+                        <div class="portfolio-overlay">
+                            <h3>Mobile App UI</h3>
+                            <a href="#">View Project</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <img src="https://source.unsplash.com/random/600x400/?team" alt="Our Team">
+                <div class="about-content">
+                    <h2>About Konreik</h2>
+                    <p>At Konreik, we're passionate about creating exceptional web experiences. Our expertise in frontend development allows us to bring creativity, technical prowess, and a deep understanding of user experience to every project.</p>
+                    <p>We stay at the forefront of web technologies to ensure your website not only looks stunning but also performs flawlessly across all devices. Our collaborative approach means we work closely with you to understand your unique needs and transform your vision into reality.</p>
+                    <a href="#contact" class="btn">Work With Us</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <h2>Get In Touch</h2>
+                <form>
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <textarea placeholder="Your Message" required></textarea>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+            </div>
+        </section>
+
+        <section id="testimonials">
+            <div class="container">
+                <h2>Client Testimonials</h2>
+                <div class="testimonial-grid">
+                    <div class="testimonial-item">
+                        <img src="https://source.unsplash.com/random/100x100/?portrait-1" alt="Client 1">
+                        <p>"Konreik transformed our outdated website into a modern, user-friendly platform. Their attention to detail and responsiveness throughout the project was impressive."</p>
+                        <p class="client-name">Sarah J., E-commerce Owner</p>
+                    </div>
+                    <div class="testimonial-item">
+                        <img src="https://source.unsplash.com/random/100x100/?portrait-2" alt="Client 2">
+                        <p>"Working with Konreik was a game-changer for our startup. They delivered a website that perfectly captures our brand and has significantly improved our online presence."</p>
+                        <p class="client-name">Mike T., Tech Startup Founder</p>
+                    </div>
+                    <div class="testimonial-item">
+                        <img src="https://source.unsplash.com/random/100x100/?portrait-3" alt="Client 3">
+                        <p>"The expertise at Konreik is evident in the seamless user experience they created for our complex web application. They exceeded our expectations in every way."</p>
+                        <p class="client-name">Lisa R., Marketing Director</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Konreik. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenu.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            mobileMenu.innerHTML = navLinks.classList.contains('active') ? '&#10005;' : '&#9776;';
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    navLinks.classList.remove('active');
+                    mobileMenu.innerHTML = '&#9776;';
+                }
+            });
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.query
